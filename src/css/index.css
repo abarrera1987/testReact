@@ -14,62 +14,49 @@ code {
     monospace;
 }
 
+.cardShadow {
+  box-shadow: 1px 3px 6px 5px rgba(0, 0, 0, 0.1);
+}
+
 .App {
   height: 100vh;
 }
 
-.searchContent {
-  /* height: 100vh; */
-}
-
 .navbar {
-
   height: 80px;
 }
 
 .topSearch {
-  
   top: 10px;
   right: 10px;
   z-index: 1030;
   width: 810px !important;
   text-align: right !important;
-
 }
 
 #contSearch {
-
   height: 100px !important;
-
 }
 
-.fade-enter{
-
+.fade-enter {
   opacity: 0;
-
 }
 
-.fade-enter.fade-enter-active{
-
+.fade-enter.fade-enter-active {
   opacity: 1;
-  transition: opacity .5s ease-in;
-
+  transition: opacity 1s ease-in;
 }
 
 .fade-exit {
-
   opacity: 1;
-
 }
 
-.fade-exit.fade-exit-active{
-
+.fade-exit.fade-exit-active {
   opacity: 0;
-  transition: opacity .5s ease-in;
+  transition: opacity 1s ease-in;
 }
 
-@media (max-width: 768px){
-
+@media (max-width: 768px) {
   .mediaTop {
     position: fixed !important;
     top: 10px;
@@ -78,9 +65,5 @@ code {
     width: 810px !important;
     text-align: right !important;
     color: white !important;
-  
   }
-
- 
-
 }

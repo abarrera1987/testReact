@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ModalInfo from './ModalInfo';
 
 export default class SearchInput extends Component {
 
@@ -9,11 +8,16 @@ export default class SearchInput extends Component {
 
 	state = {
 
-		valida: ''
+		valida: '',
+		page: 1, 
+		scrolling: false,
+		totalPages: null
 	}
+
 	formSub = (e) => {
 		e.preventDefault();
 	}
+
 	handleLoginKeyUp(e) {
 
 		if (!this.listMovies.current.checked && !this.listSeries.current.checked) {
@@ -29,14 +33,14 @@ export default class SearchInput extends Component {
 			})
 
 			if (e.target.value.length > 3) {
-				console.log(e.target.value.length);
+				
 				this.listMultimedia(e.target.value);
 				this.addClass();
-				
-			}else {
 
+			} else {
+				this.listMultimedia(e.target.value);
 				this.removeClass();
-				
+
 			}
 
 		}
@@ -52,8 +56,9 @@ export default class SearchInput extends Component {
 		})
 		if (this.searchInput.current.value.length >= 3) {
 
-			
+
 			this.searchInput.current.value = "";
+			this.listMultimedia("");
 			// this.listMultimedia(this.searchInput.current.value);
 
 		}
@@ -61,36 +66,89 @@ export default class SearchInput extends Component {
 
 	}
 
+	// componentWillMount(){
+
+	// 	this.scrollListener = window.addEventListener('scroll', (e) => {
+	// 		this.handleScroll(e);
+	// 	})
+	// }
+
+	// handleScroll = (e) => {
+		
+	// 	const {scrolling, totalPages, page} = this.state;
+	// 	let element = document.querySelectorAll('.multi .cardShadow').length - 1;
+	// 	if(scrolling) return
+	// 	if(totalPages <= page) return
+	// 	const lastCard = document.querySelectorAll('.multi .cardShadow')[element]
+	// 	const lastCardOffeset = lastCard.offsetTop + lastCard.clientHeight
+	// 	const pageOffset = window.pageYOffset + window.innerHeight
+	// 	var bootomOffset = 200
+	// 	if(pageOffset > lastCardOffeset - bootomOffset){
+	// 		this.loadMore();
+	// 	}
+	// }
+
+	// loadMore = () => {
+
+	// 	this.setState(prevState => ({
+	// 		scrolling: true,
+	// 		page: prevState.page + 1,
+			
+	// 	}), this.listMultimedia(this.searchInput.current.value))
+	// }
+
 	listMultimedia(multi) {
 
 		const type = this.listMovies.current.checked ? 'movie' : 'series';
-
-		let url = `http://www.omdbapi.com/?s=${multi}&page=1&apikey=fd465dc8&type=${type}`;
-
+		let url = `http://www.omdbapi.com/?s=${multi}&page=${this.state.page}&apikey=fd465dc8&type=${type}`;
 		fetch(url).then(respuesta => {
 			return respuesta.json();
 		}).then(multimedia => {
+			
+			if (multi.length > 3) {
 
-			if (multimedia.Search != undefined) {
+				if (multimedia.Search != undefined) {
 
-				this.props.multimedia(multimedia.Search);
-				this.props.totalMultimedia(multimedia.totalResults);
+					this.props.multimedia(multimedia.Search);
+					this.props.totalMultimedia(multimedia.totalResults);
+					this.setState({
 
-			}else {
+						totalPages: Math.round(multimedia.totalResults/10),
+						scrolling: false
 
+					})
+
+				} else {
+
+					this.props.multimedia(multimedia.Search = []);
+					this.props.totalMultimedia(multimedia.totalResults = 0);
+					this.setState({
+
+						totalPages: 0,
+						scrolling: false
+
+					})
+				}
+
+			} else {
+				
 				this.props.multimedia(multimedia.Search = []);
-				this.props.totalMultimedia(multimedia.totalResults = 0);
+				this.props.totalMultimedia(multimedia.totalResults = "");
+				
 			}
 
 		})
+
 	}
 
 	addClass() {
 		this.setState({ addClass: true });
 	}
-	removeClass(){
+
+	removeClass() {
 		this.setState({ addClass: false });
 	}
+
 	render() {
 		let boxClass = ["col-12 col-md-6 col-lg-4 m-auto mediaTop"];
 		let classContent = [""];

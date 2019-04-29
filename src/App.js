@@ -20,7 +20,7 @@ class App extends Component {
 
   }
   totalMultimedia = (totalMultimedia) => {
-    console.log(totalMultimedia)
+
     this.setState({
       totalMultimedia: totalMultimedia
     })
@@ -43,7 +43,7 @@ class App extends Component {
     const title = "Movies";
     const data = [];
     return (
-      <div className="container-fluid App pl-0">
+      <div className="container-fluid App pl-0" id="backPage">
         <Header
           title={this.state.title}
 
@@ -55,12 +55,12 @@ class App extends Component {
           totalMultimedia={this.totalMultimedia} />
 
         <div className="container">
-        <div className="row">
-          <Multimedia
-            multimedia={this.state.multimedia}
-            totalMultimedia ={this.state.totalMultimedia}
-          />
-        </div>
+          <div className="row multi">
+            <Multimedia
+              multimedia={this.state.multimedia}
+              totalMultimedia={this.state.totalMultimedia}
+            />
+          </div>
         </div>
       </div>
     );
