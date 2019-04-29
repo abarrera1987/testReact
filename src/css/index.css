@@ -1,0 +1,86 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: white !important;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+.App {
+  height: 100vh;
+}
+
+.searchContent {
+  /* height: 100vh; */
+}
+
+.navbar {
+
+  height: 80px;
+}
+
+.topSearch {
+  
+  top: 10px;
+  right: 10px;
+  z-index: 1030;
+  width: 810px !important;
+  text-align: right !important;
+
+}
+
+#contSearch {
+
+  height: 100px !important;
+
+}
+
+.fade-enter{
+
+  opacity: 0;
+
+}
+
+.fade-enter.fade-enter-active{
+
+  opacity: 1;
+  transition: opacity .5s ease-in;
+
+}
+
+.fade-exit {
+
+  opacity: 1;
+
+}
+
+.fade-exit.fade-exit-active{
+
+  opacity: 0;
+  transition: opacity .5s ease-in;
+}
+
+@media (max-width: 768px){
+
+  .mediaTop {
+    position: fixed !important;
+    top: 10px;
+    right: 10px;
+    z-index: 1030;
+    width: 810px !important;
+    text-align: right !important;
+    color: white !important;
+  
+  }
+
+ 
+
+}
